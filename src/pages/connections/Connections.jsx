@@ -10,6 +10,7 @@ import {
 } from "../../api/api";
 const Connections = () => {
   const [data, setData] = useState([]);
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     const fetchList = async () => {
@@ -80,7 +81,6 @@ const Connections = () => {
           user_name: "",
           password: "",
         });
-        setOpen(false);
       });
   };
   return (
@@ -97,6 +97,8 @@ const Connections = () => {
             handleClose,
             handleAddConnection,
             loading,
+            error,
+            setError,
           }}
         />
       }

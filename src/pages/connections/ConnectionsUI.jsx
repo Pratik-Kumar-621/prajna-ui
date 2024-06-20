@@ -24,6 +24,8 @@ const ConnectionsUI = (props) => {
     input,
     setInput,
     handleClickOpen,
+    setError,
+    error,
     handleClose,
     handleAddConnection,
     loading,
@@ -81,9 +83,10 @@ const ConnectionsUI = (props) => {
                   label="Connection Name"
                   variant="standard"
                   value={input.connection_name}
-                  onChange={(e) =>
-                    setInput({ ...input, connection_name: e.target.value })
-                  }
+                  onChange={(e) => {
+                    setInput({ ...input, connection_name: e.target.value });
+                    setError("");
+                  }}
                 />
 
                 <TextField
@@ -94,9 +97,10 @@ const ConnectionsUI = (props) => {
                   label="Server"
                   variant="standard"
                   value={input.server}
-                  onChange={(e) =>
-                    setInput({ ...input, server: e.target.value })
-                  }
+                  onChange={(e) => {
+                    setInput({ ...input, server: e.target.value });
+                    setError("");
+                  }}
                 />
                 <TextField
                   required
@@ -106,7 +110,10 @@ const ConnectionsUI = (props) => {
                   label="Port"
                   variant="standard"
                   value={input.port}
-                  onChange={(e) => setInput({ ...input, port: e.target.value })}
+                  onChange={(e) => {
+                    setInput({ ...input, port: e.target.value });
+                    setError("");
+                  }}
                 />
 
                 <TextField
@@ -117,9 +124,10 @@ const ConnectionsUI = (props) => {
                   label="User Name"
                   variant="standard"
                   value={input.user_name}
-                  onChange={(e) =>
-                    setInput({ ...input, user_name: e.target.value })
-                  }
+                  onChange={(e) => {
+                    setInput({ ...input, user_name: e.target.value });
+                    setError("");
+                  }}
                 />
                 <TextField
                   required
@@ -130,11 +138,15 @@ const ConnectionsUI = (props) => {
                   variant="standard"
                   type="password"
                   value={input.password}
-                  onChange={(e) =>
-                    setInput({ ...input, password: e.target.value })
-                  }
+                  onChange={(e) => {
+                    setInput({ ...input, password: e.target.value });
+                    setError("");
+                  }}
                 />
               </>
+              {error && (
+                <div style={{ color: "red" }}>An unexpected error occured</div>
+              )}
             </DialogContent>
             <DialogActions>
               <Button
