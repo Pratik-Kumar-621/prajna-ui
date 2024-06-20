@@ -9,6 +9,7 @@ import Paper from "@mui/material/Paper";
 import { connectionData } from "../dummyData";
 import {
   Button,
+  CircularProgress,
   Dialog,
   DialogActions,
   DialogContent,
@@ -18,12 +19,14 @@ import {
 const ConnectionsUI = (props) => {
   const {
     open,
+    data,
     setOpen,
     input,
     setInput,
     handleClickOpen,
     handleClose,
     handleAddConnection,
+    loading,
   } = props;
   return (
     <div className="connections">
@@ -46,14 +49,14 @@ const ConnectionsUI = (props) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {connectionData.map((row) => (
+              {data?.map((row) => (
                 <TableRow
                   key={row.name}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
-                  <TableCell align="center">{row.connectionName}</TableCell>
+                  <TableCell align="center">{row.connection_name}</TableCell>
                   <TableCell align="center">{row.port}</TableCell>
-                  <TableCell align="center">{row.serverName}</TableCell>
+                  <TableCell align="center">{row.server}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -62,86 +65,104 @@ const ConnectionsUI = (props) => {
       </div>
       <Dialog
         open={open}
-        onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
         <div className="dialog-main">
           <DialogTitle id="alert-dialog-title">{"Add Connection"}</DialogTitle>
-          <DialogContent>
-            <>
-              <TextField
-                className="input-form"
-                fullWidth
-                id="standard-basic"
-                label="Connection Name"
-                variant="standard"
-                value={input.connectionName}
-                onChange={(e) =>
-                  setInput({ ...input, connectionName: e.target.value })
-                }
-              />
+          <form onSubmit={handleAddConnection}>
+            <DialogContent>
+              <>
+                <TextField
+                  required
+                  className="input-form"
+                  fullWidth
+                  id="standard-basic"
+                  label="Connection Name"
+                  variant="standard"
+                  value={input.connection_name}
+                  onChange={(e) =>
+                    setInput({ ...input, connection_name: e.target.value })
+                  }
+                />
 
-              <TextField
-                className="input-form"
-                fullWidth
-                id="standard-basic"
-                label="Server"
-                variant="standard"
-                value={input.serverName}
-                onChange={(e) =>
-                  setInput({ ...input, serverName: e.target.value })
-                }
-              />
-              <TextField
-                className="input-form"
-                fullWidth
-                id="standard-basic"
-                label="Port"
-                variant="standard"
-                value={input.port}
-                onChange={(e) => setInput({ ...input, port: e.target.value })}
-              />
+                <TextField
+                  required
+                  className="input-form"
+                  fullWidth
+                  id="standard-basic"
+                  label="Server"
+                  variant="standard"
+                  value={input.server}
+                  onChange={(e) =>
+                    setInput({ ...input, server: e.target.value })
+                  }
+                />
+                <TextField
+                  required
+                  className="input-form"
+                  fullWidth
+                  id="standard-basic"
+                  label="Port"
+                  variant="standard"
+                  value={input.port}
+                  onChange={(e) => setInput({ ...input, port: e.target.value })}
+                />
 
-              <TextField
-                className="input-form"
-                fullWidth
-                id="standard-basic"
-                label="User Name"
-                variant="standard"
-                value={input.userName}
-                onChange={(e) =>
-                  setInput({ ...input, userName: e.target.value })
-                }
-              />
-              <TextField
-                className="input-form"
-                fullWidth
-                id="standard-basic"
-                label="Password"
-                variant="standard"
-                type="password"
-                value={input.password}
-                onChange={(e) =>
-                  setInput({ ...input, password: e.target.value })
-                }
-              />
-            </>
-          </DialogContent>
-          <DialogActions>
-            <Button variant="outlined" color="error" onClick={handleClose}>
-              Cancel
-            </Button>
-            <Button
-              variant="contained"
-              color="success"
-              autoFocus
-              onClick={handleAddConnection}
-            >
-              Submit
-            </Button>
-            <br />
-          </DialogActions>
+                <TextField
+                  required
+                  className="input-form"
+                  fullWidth
+                  id="standard-basic"
+                  label="User Name"
+                  variant="standard"
+                  value={input.user_name}
+                  onChange={(e) =>
+                    setInput({ ...input, user_name: e.target.value })
+                  }
+                />
+                <TextField
+                  required
+                  className="input-form"
+                  fullWidth
+                  id="standard-basic"
+                  label="Password"
+                  variant="standard"
+                  type="password"
+                  value={input.password}
+                  onChange={(e) =>
+                    setInput({ ...input, password: e.target.value })
+                  }
+                />
+              </>
+            </DialogContent>
+            <DialogActions>
+              <Button
+                variant="outlined"
+                color="error"
+                onClick={handleClose}
+                sx={{ width: 100 }}
+                disabled={loading}
+              >
+                Cancel
+              </Button>
+              &nbsp; &nbsp;
+              <Button
+                variant="contained"
+                color="success"
+                autoFocus
+                type="submit"
+                sx={{ width: 100 }}
+              >
+                {loading ? (
+                  <CircularProgress size={24} style={{ color: "white" }} />
+                ) : (
+                  "Submit"
+                )}
+              </Button>
+              <br />
+            </DialogActions>
+          </form>
         </div>
       </Dialog>
     </div>

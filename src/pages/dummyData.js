@@ -1,20 +1,5 @@
 import { type } from "@testing-library/user-event/dist/type";
 
-export const connectionData = [
-  {
-    id: 1,
-    connectionName: "SQL Lite",
-    port: "Port 1",
-    serverName: "Server 1",
-  },
-  {
-    id: 2,
-    connectionName: "SQL Lite",
-    port: "Port 2",
-    serverName: "Server 2",
-  },
-];
-
 export const trainingData = [
   {
     type: "ddl",
