@@ -1,0 +1,24 @@
+.dashboard {
+  position: relative;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  //   background-image: url("../images/background.png");
+  //   background-position: center;
+  //   background-repeat: no-repeat;
+  //   background-size: cover;
+  //   background-attachment: fixed;
+
+  &-left {
+    padding: 40px 0 40px 60px;
+    &-links {
+      &-item {
+        &-pending {
+          border: 1px solid rgb(63, 63, 63);
+          color: rgb(63, 63, 63);
+          text-decoration: none !important;
+        }
+      }
+    }
+  }
+}
