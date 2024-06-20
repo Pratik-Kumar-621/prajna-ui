@@ -1,4 +1,4 @@
-import { IconButton, Tooltip } from "@mui/material";
+import { IconButton, MenuItem, Select, Tooltip } from "@mui/material";
 import React from "react";
 import { NavLink } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
@@ -21,7 +21,7 @@ const DashboardComponent = ({ children }) => {
                   : "dashboard-left-links-item-link"
               }
             >
-              Connection Strings
+              Database Connection
             </NavLink>
           </div>
           <div className="dashboard-left-links-item">
@@ -60,9 +60,44 @@ const DashboardComponent = ({ children }) => {
           </div>
         </div>
         <div className="dashboard-left-history">
-          <div className="dashboard-left-history"></div>
+          <div className="dashboard-left-history-label">Today</div>
+          <hr />
           <div className="dashboard-left-history-item">
             give me the top performing roas with value
+          </div>
+        </div>
+        <div className="dashboard-left-dropdown">
+          <div className="dashboard-left-dropdown-item">
+            <div className="dashboard-left-dropdown-item-name">Language</div>
+            <div className="dashboard-left-dropdown-item-select">
+              <Select
+                fullWidth
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value="english"
+                label="English"
+              >
+                <MenuItem value="english">English</MenuItem>
+                <MenuItem value="dutch">Dutch</MenuItem>
+              </Select>
+            </div>
+          </div>
+          <div className="dashboard-left-dropdown-item">
+            <div className="dashboard-left-dropdown-item-name">
+              DB Connection
+            </div>
+            <div className="dashboard-left-dropdown-item-select">
+              <Select
+                fullWidth
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value="sponsered"
+                label=""
+              >
+                <MenuItem value="sponsered">SPDB</MenuItem>
+                <MenuItem value="dutch">Dutch</MenuItem>
+              </Select>
+            </div>
           </div>
         </div>
       </div>
@@ -76,6 +111,7 @@ const DashboardComponent = ({ children }) => {
             Get data anywhere anytime
           </div>
         </div>
+        <br />
         {children}
       </div>
     </div>
