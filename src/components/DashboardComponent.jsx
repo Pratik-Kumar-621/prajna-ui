@@ -1,11 +1,13 @@
 import { IconButton, MenuItem, Select, Tooltip } from "@mui/material";
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
 import ImageSVG from "../images/edit.svg";
 import LogoImage from "../images/background.png";
 
 const DashboardComponent = ({ children }) => {
+  const location = useLocation();
+  console.log(location);
   return (
     <div className="dashboard">
       <div className="dashboard-left">
@@ -66,40 +68,41 @@ const DashboardComponent = ({ children }) => {
             give me the top performing roas with value
           </div>
         </div>
-        <div className="dashboard-left-dropdown">
-          <div className="dashboard-left-dropdown-item">
-            <div className="dashboard-left-dropdown-item-name">Language</div>
-            <div className="dashboard-left-dropdown-item-select">
-              <Select
-                fullWidth
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value="english"
-                label="English"
-              >
-                <MenuItem value="english">English</MenuItem>
-                <MenuItem value="dutch">Dutch</MenuItem>
-              </Select>
+        {location.pathname === "/chat" && (
+          <div className="dashboard-left-dropdown">
+            <div className="dashboard-left-dropdown-item">
+              <div className="dashboard-left-dropdown-item-name">Language</div>
+              <div className="dashboard-left-dropdown-item-select">
+                <Select
+                  fullWidth
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value="english"
+                  label="English"
+                >
+                  <MenuItem value="english">English</MenuItem>
+                  <MenuItem value="dutch">Dutch</MenuItem>
+                </Select>
+              </div>
+            </div>
+            <div className="dashboard-left-dropdown-item">
+              <div className="dashboard-left-dropdown-item-name">
+                DB Connection
+              </div>
+              <div className="dashboard-left-dropdown-item-select">
+                <Select
+                  fullWidth
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value="sponsered"
+                  label=""
+                >
+                  <MenuItem value="sponsered">SPDB</MenuItem>
+                </Select>
+              </div>
             </div>
           </div>
-          <div className="dashboard-left-dropdown-item">
-            <div className="dashboard-left-dropdown-item-name">
-              DB Connection
-            </div>
-            <div className="dashboard-left-dropdown-item-select">
-              <Select
-                fullWidth
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value="sponsered"
-                label=""
-              >
-                <MenuItem value="sponsered">SPDB</MenuItem>
-                <MenuItem value="dutch">Dutch</MenuItem>
-              </Select>
-            </div>
-          </div>
-        </div>
+        )}
       </div>
       <div className="dashboard-right">
         <div className="dashboard-right-heading">
@@ -111,7 +114,6 @@ const DashboardComponent = ({ children }) => {
             Get data anywhere anytime
           </div>
         </div>
-        <br />
         {children}
       </div>
     </div>

@@ -1,0 +1,18 @@
+.training {
+  &-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    &-text {
+      &-main {
+        font-size: 1.25rem;
+        font-weight: 500;
+        margin-bottom: 5px;
+      }
+      &-sub {
+        font-size: 14px;
+      }
+    }
+  }
+}

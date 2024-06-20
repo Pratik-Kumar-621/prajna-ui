@@ -13,42 +13,6 @@ export const connectionData = [
     port: "Port 2",
     serverName: "Server 2",
   },
-  {
-    id: 3,
-    connectionName: "Azure SQL",
-    port: "Port 3",
-    serverName: "Server 3",
-  },
-  {
-    id: 4,
-    connectionName: "Azure SQL",
-    port: "Port 4",
-    serverName: "Server 4",
-  },
-  {
-    id: 5,
-    connectionName: "Atlas Mongo",
-    port: "Port 5",
-    serverName: "Server 5",
-  },
-  {
-    id: 6,
-    connectionName: "Atlas Mongo",
-    port: "Port 6",
-    serverName: "Server 6",
-  },
-  {
-    id: 7,
-    connectionName: "Oracle",
-    port: "Port 7",
-    serverName: "Server 7",
-  },
-  {
-    id: 8,
-    connectionName: "Oracle",
-    port: "Port 8",
-    serverName: "Server 8",
-  },
 ];
 
 export const trainingData = [

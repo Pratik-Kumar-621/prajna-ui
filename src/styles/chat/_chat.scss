@@ -1,10 +1,7 @@
 .chat {
-  min-height: 85%;
-  display: flex;
-  //   margin-top: -20px;
-  flex-direction: column;
   &-data {
     margin-top: 40px;
+    margin-bottom: 20px;
     &-item {
       margin-bottom: 20px;
       &-question {
@@ -53,8 +50,20 @@
     }
   }
   &-input {
-    margin-top: auto;
-    margin-bottom: 25px;
+    position: fixed;
+    bottom: 0;
+    background-color: rgb(249, 243, 231);
+
+    margin-right: -40px;
+    margin-left: -40px;
+    padding: 10px 40px 25px;
+    width: 74%;
+    box-shadow: 2.8px 0.2px 2.2px rgba(0, 0, 0, 0.02),
+      6.7px 0.5px 5.3px rgba(0, 0, 0, 0.028),
+      12.5px 0.9px 10px rgba(0, 0, 0, 0.035),
+      22.3px 1.6px 17.9px rgba(0, 0, 0, 0.042),
+      41.8px 2.9px 33.4px rgba(0, 0, 0, 0.05),
+      100px 7px 80px rgba(0, 0, 0, 0.07);
     input {
       border-radius: 11px !important;
       background-color: white;
