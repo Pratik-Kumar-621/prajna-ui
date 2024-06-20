@@ -1,5 +1,9 @@
+import { IconButton, Tooltip } from "@mui/material";
 import React from "react";
 import { NavLink } from "react-router-dom";
+import EditIcon from "@mui/icons-material/Edit";
+import ImageSVG from "../images/edit.svg";
+import LogoImage from "../images/background.png";
 
 const DashboardComponent = ({ children }) => {
   return (
@@ -14,7 +18,7 @@ const DashboardComponent = ({ children }) => {
                   ? "dashboard-left-links-item-pending"
                   : isActive
                   ? "dashboard-left-links-item-active"
-                  : ""
+                  : "dashboard-left-links-item-link"
               }
             >
               Connection Strings
@@ -28,21 +32,45 @@ const DashboardComponent = ({ children }) => {
                   ? "dashboard-left-links-item-pending"
                   : isActive
                   ? "dashboard-left-links-item-active"
-                  : ""
+                  : "dashboard-left-links-item-link"
               }
             >
               Training Data
             </NavLink>
           </div>
           <div className="dashboard-left-links-item">
-            <NavLink to="/chat" className="dashboard-left-links-item-chat">
-              + New Chat
+            <NavLink
+              to="/chat"
+              className={({ isActive, isPending }) =>
+                isPending
+                  ? "dashboard-left-links-item-chat-pending"
+                  : isActive
+                  ? "dashboard-left-links-item-chat-active"
+                  : "dashboard-left-links-item-chat-link"
+              }
+            >
+              <span>Chat Agent</span>
+              <Tooltip title="New Chat">
+                <IconButton>
+                  <EditIcon fontSize="small" />
+                  {/* <img src={ImageSVG} alt="" /> */}
+                </IconButton>
+              </Tooltip>
             </NavLink>
+          </div>
+        </div>
+        <div className="dashboard-left-history">
+          <div className="dashboard-left-history"></div>
+          <div className="dashboard-left-history-item">
+            give me the top performing roas with value
           </div>
         </div>
       </div>
       <div className="dashboard-right">
         <div className="dashboard-right-heading">
+          <div className="dashboard-right-heading-image">
+            <img src={LogoImage} alt="" />
+          </div>
           <div className="dashboard-right-heading-main">AHAM.ai</div>
           <div className="dashboard-right-heading-sub">
             Get data anywhere anytime
