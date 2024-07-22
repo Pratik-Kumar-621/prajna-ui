@@ -1,6 +1,7 @@
 import React from "react";
 import {
   Button,
+  CircularProgress,
   FormControl,
   InputLabel,
   MenuItem,
@@ -29,12 +30,14 @@ import {
 const TrainingDataUI = (props) => {
   const {
     open,
+    data,
     setOpen,
     input,
     setInput,
     handleClickOpen,
     handleClose,
     handleAddTraining,
+    loading,
   } = props;
   return (
     <div className="training">
@@ -67,21 +70,27 @@ const TrainingDataUI = (props) => {
                   <TableRow>
                     <TableCell align="center">User Input</TableCell>
                     <TableCell align="center">Type</TableCell>
-                    <TableCell align="center" width="50%">
+                    <TableCell align="center" width="40%">
                       Content
                     </TableCell>
-                    <TableCell align="center">Actions</TableCell>
+                    <TableCell align="center" width="25%">
+                      Actions
+                    </TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {trainingData.map((row) => (
+                  {data?.map((row) => (
                     <TableRow
                       key={row.name}
                       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                     >
-                      <TableCell align="center">{row.question}</TableCell>
-                      <TableCell align="center">{row.type}</TableCell>
-                      <TableCell align="center">{row.context}</TableCell>
+                      <TableCell align="center">{row.user_input}</TableCell>
+                      <TableCell align="center">
+                        {row.training_data_type}
+                      </TableCell>
+                      <TableCell align="center" width="40%">
+                        {row.content}
+                      </TableCell>
                       <TableCell align="center">
                         <Button variant="outlined" color="error">
                           Delete
@@ -107,75 +116,91 @@ const TrainingDataUI = (props) => {
       >
         <div className="dialog-main">
           <DialogTitle id="alert-dialog-title">{"Add Connection"}</DialogTitle>
-          <DialogContent>
-            <>
-              <TextField
-                className="input-form"
-                fullWidth
-                id="standard-basic"
-                label="User Input"
-                variant="standard"
-                value={input.userInput}
-                onChange={(e) =>
-                  setInput({ ...input, userInput: e.target.value })
-                }
-              />
-
-              <TextField
-                className="input-form"
-                fullWidth
-                id="standard-basic"
-                label="Content"
-                variant="standard"
-                value={input.content}
-                onChange={(e) =>
-                  setInput({ ...input, content: e.target.value })
-                }
-              />
-              <TextField
-                className="input-form"
-                fullWidth
-                id="standard-basic"
-                label="Training Data Type"
-                variant="standard"
-                value={input.dataType}
-                onChange={(e) =>
-                  setInput({ ...input, dataType: e.target.value })
-                }
-              />
-              <FormControl className="select-input-form" fullWidth>
-                <InputLabel id="demo-simple-select-label">
-                  Database Connection
-                </InputLabel>
-                <Select
+          <form onSubmit={handleAddTraining}>
+            <DialogContent>
+              <>
+                <TextField
+                  required
+                  className="input-form"
                   fullWidth
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={input.dbConnection}
-                  label="Database Connection"
+                  id="standard-basic"
+                  label="User Input"
+                  variant="standard"
+                  value={input.user_input}
                   onChange={(e) =>
-                    setInput({ ...input, dbConnection: e.target.value })
+                    setInput({ ...input, user_input: e.target.value })
                   }
-                >
-                  <MenuItem value="sponsered">Sponsored Product</MenuItem>
-                </Select>
-              </FormControl>
-            </>
-          </DialogContent>
-          <DialogActions>
-            <Button variant="outlined" color="error" onClick={handleClose}>
-              Cancel
-            </Button>
-            <Button
-              variant="contained"
-              color="success"
-              autoFocus
-              onClick={handleAddTraining}
-            >
-              Submit
-            </Button>
-            <br />
-          </DialogActions>
+                />
+
+                <TextField
+                  required
+                  className="input-form"
+                  fullWidth
+                  id="standard-basic"
+                  label="Content"
+                  variant="standard"
+                  value={input.content}
+                  onChange={(e) =>
+                    setInput({ ...input, content: e.target.value })
+                  }
+                />
+                <TextField
+                  required
+                  className="input-form"
+                  fullWidth
+                  id="standard-basic"
+                  label="Training Data Type"
+                  variant="standard"
+                  value={input.training_data_type}
+                  onChange={(e) =>
+                    setInput({ ...input, training_data_type: e.target.value })
+                  }
+                />
+                <FormControl className="select-input-form" fullWidth>
+                  <InputLabel id="demo-simple-select-label">
+                    Database Connection
+                  </InputLabel>
+                  <Select
+                    fullWidth
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={input.db_conn_name}
+                    label="Database Connection"
+                    onChange={(e) =>
+                      setInput({ ...input, db_conn_name: e.target.value })
+                    }
+                  >
+                    <MenuItem value="SPDB">Sponsored Product</MenuItem>
+                  </Select>
+                </FormControl>
+              </>
+            </DialogContent>
+            <DialogActions>
+              <Button
+                variant="outlined"
+                color="error"
+                onClick={handleClose}
+                sx={{ width: 100 }}
+                disabled={loading}
+              >
+                Cancel
+              </Button>
+              <Button
+                variant="contained"
+                color="success"
+                autoFocus
+                type="submit"
+                sx={{ width: 100 }}
+              >
+                {loading ? (
+                  <CircularProgress size={24} style={{ color: "white" }} />
+                ) : (
+                  "Submit"
+                )}
+              </Button>
+              <br />
+            </DialogActions>
+          </form>
         </div>
       </Dialog>
     </div>

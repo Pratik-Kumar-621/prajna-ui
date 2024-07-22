@@ -77,7 +77,7 @@ const DashboardComponent = ({ children }) => {
                   fullWidth
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
-                  value="english"
+                  defaultValue="english"
                   label="English"
                 >
                   <MenuItem value="english">English</MenuItem>
@@ -94,10 +94,11 @@ const DashboardComponent = ({ children }) => {
                   fullWidth
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
-                  value="sponsered"
+                  defaultValue="sponsered"
                   label=""
                 >
                   <MenuItem value="sponsered">SPDB</MenuItem>
+                  <MenuItem value="sponsedred">SPffDB</MenuItem>
                 </Select>
               </div>
             </div>

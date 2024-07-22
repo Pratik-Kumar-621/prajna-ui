@@ -12,59 +12,59 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
-const ChatUI = () => {
-  const [show, setShow] = useState(false);
-  const [input, setInput] = useState("");
-  const options = {
-    chart: {
-      id: "basic-bar",
-    },
-    plotOptions: {
-      bar: {
-        barHeight: "100%",
-        distributed: true,
-        vertical: true,
-        dataLabels: {
-          position: "top",
-        },
-      },
-    },
-    legend: {
-      show: true,
-      itemMargin: {
-        horizontal: 15,
-        vertical: 15,
-      },
-    },
-    dataLabels: {
-      enabled: true,
-      style: {
-        colors: ["#333"],
-      },
-      offsetY: -20,
-    },
-    xaxis: {
-      categories: ["19th June", "20th June"],
-    },
-  };
-  const series = [
-    {
-      name: "Alerts",
-      data: [900, 700],
-    },
-  ];
+const ChatUI = (props) => {
+  const { input, setInput, qna, setQna, handleSubmit, inputRef, loading } =
+    props;
+  // const options = {
+  //   chart: {
+  //     id: "basic-bar",
+  //   },
+  //   plotOptions: {
+  //     bar: {
+  //       barHeight: "100%",
+  //       distributed: true,
+  //       vertical: true,
+  //       dataLabels: {
+  //         position: "top",
+  //       },
+  //     },
+  //   },
+  //   legend: {
+  //     show: true,
+  //     itemMargin: {
+  //       horizontal: 15,
+  //       vertical: 15,
+  //     },
+  //   },
+  //   dataLabels: {
+  //     enabled: true,
+  //     style: {
+  //       colors: ["#333"],
+  //     },
+  //     offsetY: -20,
+  //   },
+  //   xaxis: {
+  //     categories: ["19th June", "20th June"],
+  //   },
+  // };
+  // const series = [
+  //   {
+  //     name: "Alerts",
+  //     data: [900, 700],
+  //   },
+  // ];
 
   return (
     <div className="chat">
       <div className="chat-data">
-        {show && (
+        {qna.length ? (
           <>
-            {chatData.map((item) => {
+            {qna.map((item) => {
               return (
                 <div className="chat-data-item">
                   <div className="chat-data-item-question">
                     <div className="chat-data-item-question-text">
-                      {item.question}
+                      {item.question_asked}
                     </div>
                     <img src={chatAvatar} alt="" />
                   </div>
@@ -72,7 +72,7 @@ const ChatUI = () => {
                     <AccountCircleIcon sx={{ fontSize: 40 }} />
                     <div className="chat-data-item-answer-text">
                       <div className="chat-data-item-answer-text-text">
-                        {item.answer.text}
+                        {item.data}
                       </div>
                       <div className="chat-data-item-answer-text-table">
                         <TableContainer component={Paper}>
@@ -82,67 +82,31 @@ const ChatUI = () => {
                           >
                             <TableHead>
                               <TableRow>
-                                <TableCell align="center">
-                                  Campaign Id
-                                </TableCell>
-                                <TableCell align="center">
-                                  Reporting date{" "}
-                                </TableCell>
-                                <TableCell align="center">Cart </TableCell>
-                                <TableCell align="center">Clicks </TableCell>
-                                <TableCell align="center">
-                                  Daily Budget{" "}
-                                </TableCell>
-                                <TableCell align="center">
-                                  Daily Spend{" "}
-                                </TableCell>
-                                <TableCell align="center">
-                                  Campaign Name{" "}
-                                </TableCell>
-                                <TableCell align="center">Raos</TableCell>
+                                {item.column_names.map((it) => {
+                                  return (
+                                    <TableCell align="center">{it}</TableCell>
+                                  );
+                                })}
                               </TableRow>
                             </TableHead>
-                            <TableBody>
-                              {item.answer.tableData.map((row) => (
-                                <TableRow
-                                  key={row.name}
-                                  sx={{
-                                    "&:last-child td, &:last-child th": {
-                                      border: 0,
-                                    },
-                                  }}
-                                >
-                                  <TableCell align="center">
-                                    {row.campaignId}
-                                  </TableCell>
-                                  <TableCell align="center">
-                                    {row.reportingDate}
-                                  </TableCell>
-                                  <TableCell align="center">
-                                    {row.addToCart}
-                                  </TableCell>
-                                  <TableCell align="center">
-                                    {row.clicks}
-                                  </TableCell>
-                                  <TableCell align="center">
-                                    {row.dailyBudget}
-                                  </TableCell>
-                                  <TableCell align="center">
-                                    {row.dailySpend}
-                                  </TableCell>
-                                  <TableCell align="center">
-                                    {row.campaign_name}
-                                  </TableCell>
-                                  <TableCell align="center">
-                                    {row.roas}
-                                  </TableCell>
-                                </TableRow>
-                              ))}
-                            </TableBody>
+
+                            {item.table.map((it) => {
+                              return (
+                                <TableBody>
+                                  {it.map((res, cnt) => {
+                                    return (
+                                      <TableCell align="center">
+                                        {res}
+                                      </TableCell>
+                                    );
+                                  })}
+                                </TableBody>
+                              );
+                            })}
                           </Table>
                         </TableContainer>
                       </div>
-                      <div className="chat-data-item-answer-text-graph">
+                      {/* <div className="chat-data-item-answer-text-graph">
                         <Chart
                           options={options}
                           series={series}
@@ -150,23 +114,24 @@ const ChatUI = () => {
                           width="100%"
                           height="300"
                         />
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>
               );
             })}
           </>
+        ) : (
+          ""
         )}
       </div>
+      <div
+        className="chat-view"
+        ref={inputRef}
+        style={{ marginBottom: 20 }}
+      ></div>
       <div className="chat-input">
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            setShow(true);
-            setInput("");
-          }}
-        >
+        <form onSubmit={handleSubmit}>
           <TextField
             sx={{ borderRadius: 12 }}
             fullWidth
@@ -175,6 +140,7 @@ const ChatUI = () => {
             type="text"
             placeholder="Ask AHAM"
             value={input}
+            disabled={loading}
             onChange={(e) => setInput(e.target.value)}
           />
         </form>

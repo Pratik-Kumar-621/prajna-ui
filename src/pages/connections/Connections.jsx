@@ -5,7 +5,7 @@ import axios from "axios";
 import {
   addDbConnection,
   ahService,
-  baseURL,
+  DBconnectioURL,
   dbConnectionList,
 } from "../../api/api";
 const Connections = () => {
@@ -16,7 +16,7 @@ const Connections = () => {
     const fetchList = async () => {
       try {
         const response = await axios.get(
-          baseURL + ahService + dbConnectionList
+          DBconnectioURL + ahService + dbConnectionList
         );
         // Handle the response data as needed
         setData(response.data);
@@ -56,7 +56,7 @@ const Connections = () => {
     e.preventDefault();
     setLoading(true);
     axios
-      .post(baseURL + ahService + addDbConnection, {
+      .post(DBconnectioURL + ahService + addDbConnection, {
         id: data.length + 1,
         ...input,
       })

@@ -1,10 +1,25 @@
 import { type } from "@testing-library/user-event/dist/type";
 
+export const connectionData = [
+  {
+    id: 1,
+    connection_name: "SQL Lite",
+    port: "Port 1",
+    server: "Server 1",
+  },
+  {
+    id: 2,
+    connection_name: "SQL Lite",
+    port: "Port 2",
+    server: "Server 2",
+  },
+];
+
 export const trainingData = [
   {
-    type: "ddl",
+    training_data_type: "ddl",
     question: "Question 1",
-    context: `UPDATE table_name
+    content: `UPDATE table_name
 SET column1 = value1, column2 = value2, ...
 WHERE condition;
         `,
@@ -12,7 +27,7 @@ WHERE condition;
   {
     type: "sql",
     question: "Question 2",
-    context: `UPDATE table_name
+    content: `UPDATE table_name
 SET column1 = value1, column2 = value2, ...
 WHERE condition;
         `,
@@ -20,7 +35,7 @@ WHERE condition;
   {
     type: "ddl",
     question: "Question 3",
-    context: `UPDATE table_name
+    content: `UPDATE table_name
 SET column1 = value1, column2 = value2, ...
 WHERE condition;
         `,
@@ -28,7 +43,7 @@ WHERE condition;
   {
     type: "sql",
     question: "Question 4",
-    context: `UPDATE table_name
+    content: `UPDATE table_name
 SET column1 = value1, column2 = value2, ...
 WHERE condition;
         `,
